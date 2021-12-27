@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:playout/firebaseauthentication.dart';
+import 'package:playout/home.dart';
 import 'package:playout/register.dart'; 
 
 class SignIn extends StatefulWidget {
@@ -57,6 +59,7 @@ class _SignInState extends State<SignIn> {
                   _password = value;
                 });
               },
+              obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password', 
                 hintText: 'awesomeplayoutuser@gmail.com', 
@@ -69,7 +72,14 @@ class _SignInState extends State<SignIn> {
           ),
 
           FlatButton(
-            onPressed: (){}, 
+            onPressed: () async {
+              dynamic result = await canSignIn(_email, _password);
+              if (result == true) {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+              } else {
+                print('Cannot sign in! Try again later.');
+              }
+            }, 
             child: Text('Sign In'), 
             color: Colors.purple,
           )
