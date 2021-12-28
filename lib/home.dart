@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:playout/createevents.dart';
 import 'package:playout/firebaseauthentication.dart';
 import 'package:playout/firestoredatabase.dart';
+import 'package:playout/map.dart';
 import 'package:playout/myevents.dart';
 import 'package:playout/signin.dart';
 
@@ -65,7 +66,7 @@ class _HomeState extends State<Home> {
             child: FlatButton.icon(label: Text('View on Map!'), 
               icon: Icon(Icons.location_on),
               onPressed: (){
-                print('Going to map!!');
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EventMap()));
               }  
             ),
           ),
