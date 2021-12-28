@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playout/firestoredatabase.dart';
 
 class CreateEvents extends StatefulWidget {
   const CreateEvents({ Key key }) : super(key: key);
@@ -143,9 +144,10 @@ class _CreateEventsState extends State<CreateEvents> {
                 ),
                 FlatButton(
                   child: Text('Add your event! 🎇'), 
-                  onPressed: (){
+                  onPressed: () async {
                     if (formKey.currentState.validate()) {
-                      print('Everything looks good!');
+                      await addEvent(eventName, personName, time, address, latitude, longitude, description);
+                      print('Event added successfully!');
                     } else {
                       print('Make sure all fields are completed!');
                     }
