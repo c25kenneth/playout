@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:playout/allevents.dart';
+import 'package:playout/createevents.dart';
+import 'package:playout/myevents.dart';
 
 class Home extends StatefulWidget {
   const Home({ Key key }) : super(key: key);
@@ -9,6 +12,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0; 
+  
+  List screens = [
+    AllEvents(), 
+    MyEvents(),
+    CreateEvents(), 
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,29 +25,18 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Welcome to Playout!'),
         centerTitle: true,
-
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index; 
-          });
-        }, 
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: 'Current Events', 
-          ), 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'My Events', 
-          ), 
-          BottomNavigationBarItem(
-            icon: Icon(Icons.build),
-            label: 'Add Event', 
-          ), 
-        ],
+      floatingActionButton: FloatingActionButton(
+        splashColor: Colors.greenAccent[200],
+        backgroundColor: Colors.green[300],
+        tooltip: 'Add a new event!',
+        child: Text(
+          '🛠', 
+          style: TextStyle(fontSize: 32),
+        ),
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CreateEvents()));
+        },
       ),
     );
   }
