@@ -29,12 +29,6 @@ class _HomeState extends State<Home> {
           icon: Icon(Icons.person),
           label: Text('My Events'),
           ),
-          FlatButton(
-            child: Text('Sign Out'),
-            onPressed: ()async{
-              await signOut(); 
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
-          },),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -65,6 +59,20 @@ class _HomeState extends State<Home> {
           Navigator.push(context, MaterialPageRoute(builder: (context) => CreateEvents()));
         },
       ),
+      persistentFooterButtons: [
+          Container(
+            width: 900,
+            child: FlatButton.icon(label: Text('View on Map!'), 
+              icon: Icon(Icons.location_on),
+              onPressed: (){
+                print('Going to map!!');
+              }  
+            ),
+          ),
+        
+        
+        
+      ],
     );
   }
 }
