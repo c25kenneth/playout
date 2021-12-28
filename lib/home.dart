@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:playout/createevents.dart';
 import 'package:playout/firebaseauthentication.dart';
-import 'package:playout/firestoredatabase.dart';
 import 'package:playout/map.dart';
 import 'package:playout/myevents.dart';
 import 'package:playout/signin.dart';
@@ -16,7 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentIndex = 0; 
-
+  final Completer<GoogleMapController> _mapController = Completer(); 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,15 @@ class _HomeState extends State<Home> {
           },
           icon: Icon(Icons.person),
           label: Text('My Events'),
+          ),
+          FlatButton(
+            onPressed: ()async{
+              var result = await signOut();
+              if (result == true) {
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignIn()));
+              } 
+          },
+          child: Text('Sign Out'),
           ),
         ],
       ),
@@ -61,14 +72,19 @@ class _HomeState extends State<Home> {
         },
       ),
       persistentFooterButtons: [
-          Container(
-            width: 900,
-            child: FlatButton.icon(label: Text('View on Map!'), 
-              icon: Icon(Icons.location_on),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EventMap()));
-              }  
-            ),
+          StreamBuilder<QuerySnapshot>(
+            stream: Firestore.instance.collection('events').snapshots(),
+            builder: (context, snapshot) {
+              return Container(
+                width: 900,
+                child: FlatButton.icon(label: Text('View on Map!'), 
+                  icon: Icon(Icons.location_on),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EventMap(documents: snapshot.data.documents, mapController: _mapController, initialPosition: const LatLng(47.61657864660121, -122.20093137521792),)));
+                  }  
+                ),
+              );
+            }
           ),
         
         

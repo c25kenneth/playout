@@ -31,6 +31,8 @@ class _SignInState extends State<SignIn> {
       ),
       body: Column(
         children: [
+          Text('Welcome Back to Playout ✨', style: TextStyle(fontSize: 30, ),),
+          SizedBox(height: 20),
           Container(
             child: TextFormField(
               onChanged: (value) {
@@ -81,7 +83,7 @@ class _SignInState extends State<SignIn> {
               }
             }, 
             child: Text('Sign In'), 
-            color: Colors.purple,
+            color: Colors.purpleAccent,
           )
         ],
       ),

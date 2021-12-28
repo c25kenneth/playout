@@ -32,6 +32,7 @@ class _RegisterState extends State<Register> {
       body: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text('Your Playout Journey Starts Now. 🧨', style: TextStyle(fontSize: 30, ),),
           Container(
             child: TextFormField(
               onChanged: (value) {
@@ -83,7 +84,7 @@ class _RegisterState extends State<Register> {
               }
             }, 
             child: Text('Register'), 
-            color: Colors.purple,
+            color: Colors.purpleAccent,
           )
         ],
       ),
