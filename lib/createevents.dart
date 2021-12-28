@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playout/firestoredatabase.dart';
+import 'package:playout/home.dart';
 
 class CreateEvents extends StatefulWidget {
   const CreateEvents({ Key key }) : super(key: key);
@@ -147,6 +148,7 @@ class _CreateEventsState extends State<CreateEvents> {
                   onPressed: () async {
                     if (formKey.currentState.validate()) {
                       await addEvent(eventName, personName, time, address, latitude, longitude, description);
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
                       print('Event added successfully!');
                     } else {
                       print('Make sure all fields are completed!');
