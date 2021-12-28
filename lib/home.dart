@@ -47,52 +47,7 @@ class _HomeState extends State<Home> {
               itemCount: snapshot.data.documents.length,
               itemBuilder: (context, index) {
                 final document = snapshot.data.documents[index]; 
-                return Container(
-                  child: Card(
-                    child:                      
-                          Column(
-                          children: [
-                            Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              document['event_name'],
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35.0),
-                            ),
-                          ), 
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              document['address'], 
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'At ' + document['time'], 
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
-                            ),
-                          ),
-                          SizedBox(height: 15.0),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              'Description: ' + document['description'], 
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
-                            ),
-                          ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            'Created by ' + document['person_name'], 
-                            style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25.0),
-                          ),
-                          ],
-                          ),
-                          
-                      ),
-                  
-                  padding: EdgeInsets.all(10.0),
-                );
+                return EventCard(document);
               },
             );
           }
@@ -111,5 +66,60 @@ class _HomeState extends State<Home> {
         },
       ),
     );
+  }
+}
+
+class EventCard extends StatelessWidget {
+  var document;
+  EventCard(this.document); 
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+        child: Card(
+          child:                      
+                Column(
+                children: [
+                  Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    document['event_name'],
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35.0),
+                  ),
+                ), 
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    document['address'], 
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'At ' + document['time'], 
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+                  ),
+                ),
+                SizedBox(height: 15.0),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Description: ' + document['description'], 
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19.0),
+                  ),
+                ),
+                SizedBox(height: 10.0),
+                Text(
+                  'Created by ' + document['person_name'], 
+                  style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25.0),
+                ),
+                ],
+                ),
+                
+            ),
+        
+        padding: EdgeInsets.all(10.0),
+      );
   }
 }
